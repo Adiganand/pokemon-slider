@@ -1,38 +1,111 @@
-.App {
-  text-align: center;
+/* CSS reset */
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font: inherit;
+  font-size: 100%;
+  vertical-align: baseline;
+  box-sizing: border-box;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+:root {
+  --height-of-slider: calc(var(--length-of-slider) / 2);
+  --radius-of-ball: calc(var(--length-of-slider) / 4);
+  --border-width: calc(var(--length-of-slider) / 50);
+  --border-radius: calc(
+    var(--radius-of-ball) + calc(var(--border-width) / 2)
+  ); /*to include length of border in curve radius*/
+  --radius-of-center-ball: calc(var(--length-of-slider) / 8);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+#checkbox-container {
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  align-items: center;
+  width: var(--length-of-slider);
+  height: var(--height-of-slider);
+  background-color: transparent;
+}
+#center-bar {
+  display: flex;
+  align-items: center;
+  background-color: gray;
+  width: var(--length-of-slider);
+  height: calc(
+    var(--length-of-slider) / 4
+  ); /*change it change the size of centre bar*/
+  border-radius: calc(var(--border-radius));
 }
 
-.App-link {
-  color: #61dafb;
+#red-part {
+  width: calc(var(--radius-of-ball) * 2); /*diameter of pokemon ball*/
+  height: calc(var(--radius-of-ball));
+  background-color: red;
+  border-top-left-radius: var(--border-radius);
+  border-top-right-radius: var(--border-radius);
+  border: var(--border-width) solid black;
+  border-bottom: 0;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+#lower-white-part {
+  width: calc(var(--radius-of-ball) * 2); /*diameter of pokemon ball*/
+  height: calc(var(--radius-of-ball));
+  background-color: white;
+  border-bottom-left-radius: var(--border-radius);
+  border-bottom-right-radius: var(--border-radius);
+  border: var(--border-width) solid black;
+  border-top: 0;
+}
+
+#center-black-line {
+  position: absolute;
+  transform: translateY(-50%);
+  width: calc(calc(var(--radius-of-ball) * 2));
+  height: var(--border-width);
+  background-color: black;
+}
+
+#center-white-circle {
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: calc(var(--radius-of-center-ball));
+  height: calc(var(--radius-of-center-ball));
+  border: var(--border-width) solid black;
+  background-color: white;
+  border-radius: 50%;
+}
+
+.checked {
+  transition: transform 1500ms ease;
+  animation-name: checked;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+}
+
+.unchecked {
+  transition: transform 1500ms ease;
+  animation-name: unchecked;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes checked {
+  0% {
+    transform: translate(0%, 0%) rotate(0deg);
   }
-  to {
-    transform: rotate(360deg);
+  100% {
+    transform: translate(calc(var(--length-of-slider) / 2), 0%) rotate(180deg);
+  }
+}
+
+@keyframes unchecked {
+  0% {
+    transform: translate(calc(var(--length-of-slider) / 2), 0%) rotate(180deg);
+  }
+  100% {
+    transform: translate(0%, 0%) rotate(0deg);
   }
 }

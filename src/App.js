@@ -1,25 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import "./App.css";
 
-function App() {
+const PokemonSlider = ({ size = "250px" }) => {
+  const [checked, setChecked] = useState(false);
+  let root = document.documentElement;
+  root.style.setProperty("--length-of-slider", size);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div
+      id='checkbox-container'
+      onClick={() => {
+        setChecked(!checked);
+      }}
+    >
+      <div id='center-bar'>
+        <div id='ball' className={checked ? "checked" : "unchecked"}>
+          <div id='red-part'></div>
+          <div id='center-black-line'>
+            <div id='center-white-circle'></div>
+          </div>
+          <div id='lower-white-part'></div>
+        </div>
+      </div>
     </div>
   );
-}
+};
 
-export default App;
+export default PokemonSlider;
